@@ -1,0 +1,360 @@
+8051 add:
+ORG 0000H
+MOV DPTR,#0003H
+MOVX A,@DPTR
+MOV B,A
+INC DPTR
+MOVX A,@DPTR
+ADD A,B
+INC DPTR
+MOVX @DPTR,A
+END
+
+8051 sub:
+ORG 0000H
+MOV DPTR,#0003H
+MOVX A,@DPTR
+MOV B,A
+INC DPTR
+MOVX A,@DPTR
+SUBB B,A
+INC DPTR
+MOVX @DPTR,A
+END
+
+8051 MUL:
+ORG 0000H
+MOV DPTR,#0003H
+MOVX A,@DPTR
+MOV B,A
+INC DPTR
+MOVX A,@DPTR
+MUL AB
+INC DPTR
+MOVX @DPTR,A
+END
+
+8051 DIV:
+ORG 0000H
+MOV DPTR,#0003H
+MOVX A,@DPTR
+MOV B,A
+INC DPTR
+MOVX A,@DPTR
+DIV AB
+INC DPTR
+MOVX @DPTR,A
+END
+
+8051 A^2:
+ORG 0000H
+MOV DPTR,#0003H
+MOVX A,@DPTR
+MOV B,A
+MOVX A,@DPTR
+MUL AB
+INC DPTR
+MOVX @DPTR,A
+END
+
+8051 A^3:
+ORG 0000H
+MOV DPTR,#0003H
+MOVX A,@DPTR
+MOV B,A
+MOVX A,@DPTR
+MUL AB
+MOV B,A
+MOV DPTR,#0003H
+MOVX A,@DPTR
+MUL AB
+INC DPTR
+MOVX @DPTR,A
+END
+
+8051 A^3+B^3:
+ORG 0000H
+MOV DPTR,#0003H
+MOVX A,@DPTR
+MOV B,A
+MOVX A,@DPTR
+MUL AB
+MOV B,A
+MOV DPTR,#0003H
+MOVX A,@DPTR
+MUL AB
+
+INC DPTR
+
+MOVX @DPTR,A
+INC DPTR
+MOVX A,@DPTR
+MOV B,A
+MOVX A,@DPTR
+MUL AB
+MOV B,A
+MOV DPTR,#0005H
+MOVX A,@DPTR
+MUL AB
+INC DPTR
+MOVX @DPTR,A
+
+MOV DPTR,#0004H
+MOVX A,@DPTR
+MOV B,A
+MOV DPTR,#0006H
+MOVX A,@DPTR
+ADD A,B
+INC DPTR
+MOVX @DPTR,A
+END
+
+8051 3X^3:
+ORG 0000H
+MOV DPTR,#0003H
+MOVX A,@DPTR
+MOV B,A
+MOVX A,@DPTR
+MUL AB
+MOV B,A
+MOV DPTR,#0003H
+MOVX A,@DPTR
+MUL AB
+INC DPTR
+MOVX @DPTR,A
+MOV A,#03H
+MOV B,A
+MOV DPTR,#0004H
+MOVX A,@DPTR
+MUL AB
+INC DPTR
+MOVX @DPTR,A
+END
+
+8051 A^3+B^3/2:
+ORG 0000H
+MOV DPTR,#0003H
+MOVX A,@DPTR
+MOV B,A
+MOVX A,@DPTR
+MUL AB
+MOV B,A
+MOV DPTR,#0003H
+MOVX A,@DPTR
+MUL AB
+
+INC DPTR
+
+MOVX @DPTR,A
+INC DPTR
+MOVX A,@DPTR
+MOV B,A
+MOVX A,@DPTR
+MUL AB
+MOV B,A
+MOV DPTR,#0005H
+MOVX A,@DPTR
+MUL AB
+INC DPTR
+MOVX @DPTR,A
+
+MOV DPTR,#0004H
+MOVX A,@DPTR
+MOV B,A
+MOV DPTR,#0006H
+MOVX A,@DPTR
+ADD A,B
+INC DPTR
+MOVX @DPTR,A
+
+MOV A,#02H
+MOV B,A
+MOV DPTR,#0007H
+MOVX A,@DPTR
+DIV AB
+INC DPTR
+MOVX @DPTR,A
+
+END
+
+8051 A^3+B^3/C:
+ORG 0000H
+MOV DPTR,#0003H
+MOVX A,@DPTR
+MOV B,A
+MOVX A,@DPTR
+MUL AB
+MOV B,A
+MOV DPTR,#0003H
+MOVX A,@DPTR
+MUL AB
+
+INC DPTR
+
+MOVX @DPTR,A
+INC DPTR
+MOVX A,@DPTR
+MOV B,A
+MOVX A,@DPTR
+MUL AB
+MOV B,A
+MOV DPTR,#0005H
+MOVX A,@DPTR
+MUL AB
+INC DPTR
+MOVX @DPTR,A
+
+MOV DPTR,#0004H
+MOVX A,@DPTR
+MOV B,A
+MOV DPTR,#0006H
+MOVX A,@DPTR
+ADD A,B
+INC DPTR
+MOVX @DPTR,A
+
+MOV DPTR,#0007H
+MOVX A,@DPTR
+MOV B,A
+MOV DPTR,#0008H
+MOVX A,@DPTR
+DIV AB
+INC DPTR
+MOVX @DPTR,A
+
+END
+
+8051 blink alternate (both odd and even):
+#include<reg51.h>
+void delay(void);
+void main()
+{
+	P0=0x00;
+	while(1)
+	{
+		P0=0x55;
+		delay();
+		P0=0x00;
+		delay();
+		P0=0xAA;
+		delay();
+
+	}
+}
+	void delay()
+	{
+		int i=0;
+		int j=0;
+		for(i=0;i<10;i++)
+		for(j=0;j<10000;j++){
+		}
+	
+	}
+
+8051 blink odd:
+#include<reg51.h>
+void delay(void);
+void main()
+{
+	P0=0x00;
+	while(1)
+	{
+		P0=0xAA;
+		delay();
+		P0=0x00;
+		delay();
+	
+
+	}
+}
+	void delay()
+	{
+		int i=0;
+		int j=0;
+		for(i=0;i<10;i++)
+		for(j=0;j<10000;j++){
+		}
+	
+	}
+
+8051 blink even:
+#include<reg51.h>
+void delay(void);
+void main()
+{
+	P0=0x00;
+	while(1)
+	{
+		P0=0x55;
+		delay();
+		P0=0x00;
+		delay();
+	
+
+	}
+}
+	void delay()
+	{
+		int i=0;
+		int j=0;
+		for(i=0;i<10;i++)
+		for(j=0;j<10000;j++){
+		}
+	
+	}
+
+blink all:
+
+#include<reg51.h>
+void delay(void);
+void main()
+{
+	P0=0x00;
+	while(1)
+	{
+		P0=0xFF;
+		delay();
+		P0=0x00;
+		delay();
+		
+	}
+}
+	void delay()
+	{
+		int i=0;
+		int j=0;
+		for(i=0;i<10;i++)
+		for(j=0;j<10000;j++){
+		}
+	
+	}
+
+
+8051 waves:
+#include<reg51.h>
+void delay(void);
+void main()
+{
+	P0=0x00;
+	while(1)
+	{
+		P0=0xAA;
+		delay();
+		P0=0x00;
+		delay();
+		P0 =0x55;
+		delay();
+
+	}
+}
+	void delay()
+	{
+		int i=0;
+		int j=0;
+		for(i=0;i<10;i++)
+		for(j=0;j<10000;j++){
+		}
+	
+	}
+
+		
